@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import WebViewer from "@pdftron/webviewer";
 
-import xfdfStrings from "./data";
+import xfdfStrings, { combinedXfdfString } from "./data";
 
 import "./App.css";
 
@@ -17,14 +17,16 @@ const App = () => {
       },
       viewer.current
     ).then((instance) => {
-      const { documentViewer, annotationManager, Annotations } = instance.Core;
-
-      console.log(xfdfStrings);
+      const { documentViewer, annotationManager } = instance.Core;
 
       documentViewer.addEventListener("documentLoaded", () => {
+        // option 1
         xfdfStrings.map((xfdfString) =>
           annotationManager.importAnnotations(xfdfString)
         );
+
+        // option 2
+        // annotationManager.importAnnotations(combinedXfdfString);
       });
     });
   }, []);
