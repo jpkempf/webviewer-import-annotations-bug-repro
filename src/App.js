@@ -19,14 +19,15 @@ const App = () => {
     ).then((instance) => {
       const { documentViewer, annotationManager } = instance.Core;
 
-      documentViewer.addEventListener("documentLoaded", () => {
+      documentViewer.addEventListener("documentLoaded", async () => {
         // option 1
-        xfdfStrings.map((xfdfString) =>
-          annotationManager.importAnnotations(xfdfString)
-        );
+        // xfdfStrings.forEach(
+        //   async (xfdfString) =>
+        //     await annotationManager.importAnnotations(xfdfString)
+        // );
 
         // option 2
-        // annotationManager.importAnnotations(combinedXfdfString);
+        await annotationManager.importAnnotations(combinedXfdfString);
       });
     });
   }, []);
